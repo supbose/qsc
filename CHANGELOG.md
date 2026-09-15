@@ -1,3 +1,10 @@
+
+## [1.0.2] - 2026-09-15
+### 🔧 工具变更
+
+- [0191898](/commit/019189860b2548fef1e5354c2eefae427f6b595f) 工具(update): 升级应用版本到1.0.12 (update/version.json)
+- [2b97b8f](/commit/2b97b8fca97c303463b41faf699e411dd313129c) 工具(package.json): 移除package.json中的pnpm引擎限制配置 (package.json)
+
 # Changelog
 
 ## [1.0.1] - 2026-09-15
