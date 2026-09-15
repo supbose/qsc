@@ -1,5 +1,11 @@
 
 
+
+## [1.0.4] - 2026-09-15
+### 📝 其他
+
+- [e329824](/commit/e329824ce402dbaa9ace960fca0aff74254e518c) add(update): add (update/version.json)
+
 ## [1.0.3] - 2026-09-15
 ### 📦 构建系统
 
