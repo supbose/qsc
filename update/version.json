@@ -1,10 +1,10 @@
 {
-  "versionCode": 10013,
-  "versionName": "1.0.13",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.0.13.apk",
+  "versionCode": 10014,
+  "versionName": "1.0.14",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.0.14.apk",
   "changelog": "",
   "isForceUpdate": false,
-  "fileSha256": "9e5a024e2ca3902ee73321ea0c8886caa395281215e7b7063df3f6e40404adac",
-  "fileSize": 39274896,
+  "fileSha256": "c500209458e48f544a193804872fc3c2d66db7e1cf76cf771bc9aa4724c7a460",
+  "fileSize": 39274892,
   "autoUpdate": false
 }
