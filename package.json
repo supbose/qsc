@@ -1,13 +1,6 @@
 {
   "author": "",
   "description": "",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "onFail": "download",
-      "version": "^11.20.0"
-    }
-  },
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
