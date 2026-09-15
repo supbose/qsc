@@ -1,4 +1,10 @@
 
+
+## [1.0.3] - 2026-09-15
+### 📦 构建系统
+
+- [766b1c2](/commit/766b1c225f870abe0c1aea05866f82e520c75bfc) 构建(version): bump app version to 1.0.13 (update/version.json)
+
 ## [1.0.2] - 2026-09-15
 ### 🔧 工具变更
 
