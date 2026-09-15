@@ -1,10 +1,10 @@
 {
-  "versionCode": 10010,
-  "versionName": "1.0.10",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.0.10.apk",
-  "changelog": "",
+  "versionCode": 10012,
+  "versionName": "1.0.12",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.0.12.apk",
+  "changelog": "1. qsc update 1.0.12 release",
   "isForceUpdate": false,
-  "fileSha256": "cadcf006af2cc0c169cb5a53c73a459acae104e5bfddd91ce57d96aa8e7dbd07",
+  "fileSha256": "cce2be48d8e5c9d00918e665f25ffe2a8fa85cd75c628dd6f1ace3a34cab71c1",
   "fileSize": 39258492,
   "autoUpdate": false
 }
