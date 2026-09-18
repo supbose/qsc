@@ -3,6 +3,12 @@
 
 
 
+
+## [1.0.7] - 2026-09-19
+### 🔧 工具变更
+
+- [71e6f76](/commit/71e6f76beca50a20fcc31408dcedf3a3d5fa60c3) 工具(update): bump app version to 1.6.9 (update/version.json)
+
 ## [1.0.6] - 2026-09-18
 ### 📦 构建系统
 
