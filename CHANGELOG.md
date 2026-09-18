@@ -2,6 +2,12 @@
 
 
 
+
+## [1.0.6] - 2026-09-18
+### 📦 构建系统
+
+- [4f53c62](/commit/4f53c627e8568b944ceab39177fb318fc2ff4c45) 构建(update): bump app version to 1.6.7 (update/version.json)
+
 ## [1.0.5] - 2026-09-18
 ### 📝 文档更新
 
