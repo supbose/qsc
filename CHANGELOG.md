@@ -1,6 +1,20 @@
 
 
 
+
+## [1.0.5] - 2026-09-18
+### 📝 文档更新
+
+- [ca5d90f](/commit/ca5d90ff45e91ede0f9eefc6efa31eb114eb2a40) 文档(README.md): add complete user manual for qsc app (README.md)
+
+### 📦 构建系统
+
+- [d264003](/commit/d2640031a979a0700d876926fbb5ea7b79678269) 构建(update): 更新应用版本到1.6.5 (update/version.json)
+- [bdec198](/commit/bdec198b169abb8704c031ec54d4ec63cbf8fe76) 构建(update): 更新版本到1.5.12 (update/version.json)
+- [cdda6cd](/commit/cdda6cdb1f33d156387f7c3a1c5a5b7dd5557a01) 构建(update): bump app version to 1.5.10 (update/version.json)
+- [a84db5c](/commit/a84db5c75730b902ca4adc5419d08c9fc6d49158) 构建(update): bump app version to 1.5.8 (update/version.json)
+- [ec37fd1](/commit/ec37fd1d38b9dce4373539fb93bf050247e5a0a2) 构建(update): bump app version to 1.5.6 (update/version.json)
+
 ## [1.0.4] - 2026-09-15
 ### 📝 其他
 
