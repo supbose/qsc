@@ -5,6 +5,12 @@
 
 
 
+
+## [1.0.9] - 2026-09-19
+### 📦 构建系统
+
+- [9de1df5](/commit/9de1df5b21439c42e4dcbec871e89cdfa3f6eac2) 构建(update): bump app version to 1.6.14 (update/version.json)
+
 ## [1.0.8] - 2026-09-19
 ### 📦 构建系统
 
