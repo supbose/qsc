@@ -4,6 +4,13 @@
 
 
 
+
+## [1.0.8] - 2026-09-19
+### 📦 构建系统
+
+- [9391a4f](/commit/9391a4f08f12a8bf49af4e049affbf81c66ab181) 构建(update): bump app version to 1.6.13 (update/version.json)
+- [193bb21](/commit/193bb211998aa0c60fdf8afe921cda56e2662a45) 构建(update): 升级应用版本到1.6.12 (update/version.json)
+
 ## [1.0.7] - 2026-09-19
 ### 🔧 工具变更
 
