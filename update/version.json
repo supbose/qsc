@@ -1,10 +1,10 @@
 {
-  "versionCode": 10627,
-  "versionName": "1.6.27",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.6.27.apk",
+  "versionCode": 10703,
+  "versionName": "1.7.3",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.3.apk",
   "changelog": "1. 修复已知问题\n2. 优化升级流程稳定性 github",
   "isForceUpdate": false,
-  "fileSha256": "bd569e982286f58f48ffbfedbb2fa9086b941d3ca98faeb518b873ae62794696",
-  "fileSize": 12786555,
+  "fileSha256": "7563c5842e2f22504de4984c706e0d9aeef054126276913b1a711f31b6113c31",
+  "fileSize": 12829967,
   "autoUpdate": false
 }
