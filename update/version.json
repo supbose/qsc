@@ -1,10 +1,15 @@
 {
-  "versionCode": 10710,
-  "versionName": "1.7.10",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.10.apk",
+  "versionCode": 10713,
+  "versionName": "1.7.13",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.13.apk",
   "changelog": "1. 修复已知问题\n2. 优化升级流程稳定性 github",
   "isForceUpdate": false,
-  "fileSha256": "3654d0628e9fe393218ae079c35b820f0fa576b74b068d3cfb18652a17662f0d",
+  "fileSha256": "a4319a9b47683491a077672b2bfc14060b89b0aa8326ec8e42d07b4f2179a54e",
   "fileSize": 12885651,
-  "autoUpdate": false
+  "autoUpdate": false,
+  "patchUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.10_to_1.7.13.qpd",
+  "patchSha256": "8e43bd1e2a75b1823d280023788bc95954402ed1a92fdb81d166733a2f3fbffb",
+  "patchMd5": "",
+  "patchSize": 3685285,
+  "patchBaseVersionCode": 10710
 }
