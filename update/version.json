@@ -1,15 +1,38 @@
 {
-  "versionCode": 10713,
-  "versionName": "1.7.13",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.13.apk",
+  "versionCode": 10715,
+  "versionName": "1.7.15",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.15.apk",
   "changelog": "1. 修复已知问题\n2. 优化升级流程稳定性 github",
   "isForceUpdate": false,
-  "fileSha256": "a4319a9b47683491a077672b2bfc14060b89b0aa8326ec8e42d07b4f2179a54e",
+  "fileSha256": "119ee61c851632b9fc03c4cc2e6d81f0e40db540e6d4a4045521fe5053673009",
   "fileSize": 12885651,
   "autoUpdate": false,
-  "patchUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.10_to_1.7.13.qpd",
-  "patchSha256": "8e43bd1e2a75b1823d280023788bc95954402ed1a92fdb81d166733a2f3fbffb",
+  "patchUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.10_to_1.7.15.qpd",
+  "patchSha256": "8dc66868b08fe5787769b25582e440e312381b70c98d39c1c54710b30a9b11ee",
   "patchMd5": "",
-  "patchSize": 3685285,
-  "patchBaseVersionCode": 10710
+  "patchSize": 3686241,
+  "patchBaseVersionCode": 10710,
+  "patches": [
+    {
+      "patchUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.10_to_1.7.15.qpd",
+      "patchSha256": "8dc66868b08fe5787769b25582e440e312381b70c98d39c1c54710b30a9b11ee",
+      "patchMd5": "",
+      "patchSize": 3686241,
+      "patchBaseVersionCode": 10710
+    },
+    {
+      "patchUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.5_to_1.7.15.qpd",
+      "patchSha256": "7e9a7854f824608c1fc1ab9911035e00644978591b6c46b40a9230e0580f95f9",
+      "patchMd5": "",
+      "patchSize": 3764584,
+      "patchBaseVersionCode": 10705
+    },
+    {
+      "patchUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.4_to_1.7.15.qpd",
+      "patchSha256": "92a9d2a9d74dc8108f05d2b4821a28fce7d4497cd0ad2683488649db6ee2091b",
+      "patchMd5": "",
+      "patchSize": 3764688,
+      "patchBaseVersionCode": 10704
+    }
+  ]
 }
