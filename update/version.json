@@ -1,10 +1,10 @@
 {
-  "versionCode": 10719,
-  "versionName": "1.7.19",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.19.apk",
-  "changelog": "1. 修复已知问题\n2. 优化升级流程稳定性 github",
+  "versionCode": 10720,
+  "versionName": "1.7.20",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.20.apk",
+  "changelog": "- 新增: version.json 的 changelog 自动从 CHANGELOG.md 补齐\n- 重构: changelog 提取按审查意见加固与优化",
   "isForceUpdate": false,
-  "fileSha256": "2c99ef7240fc74e6bbae7c02dc3dea192fab2bbaa3209acb1a126b24730f1bd0",
+  "fileSha256": "4d1aae5a4f622ba0fcaf016bc9e04478fca757c302fe749ce7a4bd39feadc3d4",
   "fileSize": 12869731,
   "autoUpdate": false
 }
