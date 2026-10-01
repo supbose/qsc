@@ -1,10 +1,10 @@
 {
-  "versionCode": 10724,
-  "versionName": "1.7.24",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.24.apk",
-  "changelog": "修复: 开关关闭时恢复「关于」卡片点击跳许可页，修复整卡不可点",
+  "versionCode": 10725,
+  "versionName": "1.7.25",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.25.apk",
+  "changelog": "构建: URL 配置护栏——坏地址构建期即失败，杜绝启动闪退进包",
   "isForceUpdate": false,
-  "fileSha256": "fc4e2aa730687442d8a3295fafdf2469d94630ebfeaea70be820c135fb61101c",
+  "fileSha256": "189c32f047b10cfacd060756f90360a1d165b064fe2f735556a02144e2a702f9",
   "fileSize": 12886823,
   "autoUpdate": false
 }
