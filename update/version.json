@@ -1,10 +1,10 @@
 {
-  "versionCode": 10723,
-  "versionName": "1.7.23",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.23.apk",
-  "changelog": "新增: 「关于」长按隐藏配置入口增加总闸开关，默认关闭\n新增: 「关于」长按 10 秒进入应用配置查看页（隐藏入口）",
+  "versionCode": 10724,
+  "versionName": "1.7.24",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.24.apk",
+  "changelog": "修复: 开关关闭时恢复「关于」卡片点击跳许可页，修复整卡不可点",
   "isForceUpdate": false,
-  "fileSha256": "7a0c289274342b8cf36e829a08b957025e9866ef68e63288db8e527e3b2d6825",
+  "fileSha256": "fc4e2aa730687442d8a3295fafdf2469d94630ebfeaea70be820c135fb61101c",
   "fileSize": 12886823,
   "autoUpdate": false
 }
