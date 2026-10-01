@@ -1,10 +1,10 @@
 {
-  "versionCode": 10720,
-  "versionName": "1.7.20",
-  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.20.apk",
-  "changelog": "- 新增: version.json 的 changelog 自动从 CHANGELOG.md 补齐\n- 重构: changelog 提取按审查意见加固与优化",
+  "versionCode": 10723,
+  "versionName": "1.7.23",
+  "downloadUrl": "https://qsc.cdn.qcsm.ltd/down/app-1.7.23.apk",
+  "changelog": "新增: 「关于」长按隐藏配置入口增加总闸开关，默认关闭\n新增: 「关于」长按 10 秒进入应用配置查看页（隐藏入口）",
   "isForceUpdate": false,
-  "fileSha256": "4d1aae5a4f622ba0fcaf016bc9e04478fca757c302fe749ce7a4bd39feadc3d4",
-  "fileSize": 12869731,
+  "fileSha256": "7a0c289274342b8cf36e829a08b957025e9866ef68e63288db8e527e3b2d6825",
+  "fileSize": 12886823,
   "autoUpdate": false
 }
