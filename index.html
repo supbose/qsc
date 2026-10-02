@@ -1,14 +1,967 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>qsc update</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>青数安全中心 · 使用说明书</title>
+<style>
+  :root{
+    --brand:#0F9D8F; --brand-deep:#006B5F; --brand-t90:#CCF1EC; --brand-t95:#E0F5F2;
+    --ink:#25332F; --muted:#5F6E6B; --faint:#8A9793; --line:#E4EAE8; --bg:#F6F9F8; --card:#fff;
+    --ok:#0F6E56; --warn:#C75B39; --warn-bg:#FDF3EE; --warn-line:#EFC7B4;
+    --tip-bg:#FFF9E8; --tip-line:#EAD9A0; --tip-tx:#7A5B12;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:64px}
+  body{font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-size:15.5px}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
 
+  header.hero{background:linear-gradient(135deg,#005047 0%,var(--brand-deep) 55%,var(--brand) 100%);color:#fff;padding:50px 0 40px;text-align:center}
+  header.hero .logo{width:64px;height:64px;border-radius:50%;background:#fff;color:var(--brand-deep);font-size:34px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+  header.hero h1{font-size:28px;letter-spacing:2px}
+  header.hero p{opacity:.92;margin-top:8px;font-size:14.5px}
+  .hero-badges{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .hero-badges span{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:999px;font-size:12.5px}
+
+  nav.toc{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,60,52,.05)}
+  nav.toc .wrap{display:flex;gap:2px;overflow-x:auto}
+  nav.toc a{white-space:nowrap;padding:13px 14px;font-size:13.5px;color:var(--muted);text-decoration:none;border-bottom:2.5px solid transparent}
+  nav.toc a:hover{color:var(--brand-deep)}
+  nav.toc a.active{color:var(--brand-deep);border-bottom-color:var(--brand);font-weight:700}
+
+  section{padding:38px 0 4px}
+  h2{font-size:23px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  h2 .ico{width:38px;height:38px;border-radius:11px;background:var(--brand-t90);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+  .lead{color:var(--muted);font-size:14px;margin:2px 0 18px}
+
+  /* ===== 功能模块四段式 ===== */
+  .fn{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:20px}
+  .fn>h3{font-size:18px;font-weight:800;display:flex;align-items:center;gap:10px;margin:0 0 14px;color:var(--ink)}
+  .fn>h3 .fi{width:36px;height:36px;border-radius:10px;background:var(--brand-t90);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .fn>h3 .id{font-size:12px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap}
+  .blk{margin-top:14px}
+  .blk .bt{display:inline-block;font-size:12px;font-weight:800;color:#fff;border-radius:999px;padding:2px 12px;margin-bottom:7px;letter-spacing:1px}
+  .bt.ov{background:var(--brand-deep)} .bt.fig{background:#5B72A8} .bt.st{background:var(--ok)} .bt.wn{background:var(--warn)}
+  .blk p,.blk li{font-size:14.5px;color:#3D4B47}
+  .blk ul.tick{list-style:none}
+  .blk ul.tick li{padding:3px 0 3px 24px;position:relative}
+  .blk ul.tick li::before{content:'✓';position:absolute;left:2px;color:var(--ok);font-weight:800}
+  .path{display:inline-block;background:var(--brand-t95);color:var(--brand-deep);font-size:12.5px;font-weight:600;padding:1px 10px;border-radius:999px;margin:0 2px;white-space:nowrap}
+  .tip{background:var(--tip-bg);border:1px solid var(--tip-line);color:var(--tip-tx);border-radius:10px;padding:11px 15px;font-size:14px;margin-top:12px}
+  .warnbox{background:var(--warn-bg);border:1px solid var(--warn-line);color:#8A3A1F;border-radius:10px;padding:11px 15px;font-size:14px;margin-top:12px}
+  .warnbox.big{font-size:15px;padding:16px 18px;border-width:1.5px}
+
+  /* 图区：左图右标注 */
+  .fig{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;background:#F8FBFA;border:1px dashed #C9DAD6;border-radius:12px;padding:18px;margin-top:14px}
+  .fig-note{flex:1;min-width:290px;font-size:13px}
+  .fig-cap{font-size:12px;color:var(--faint);margin-top:8px;text-align:center;width:100%}
+  table.ui{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.ui th{background:#F0F5F4;padding:7px 10px;text-align:left;font-size:12.5px}
+  table.ui td{padding:6px 10px;border-top:1px solid var(--line);vertical-align:top}
+  table.ui td:first-child{white-space:nowrap;font-weight:600;width:88px}
+
+  /* ===== 迷你手机屏（与实现一致的示意图） ===== */
+  .phone{width:206px;background:#000;border-radius:22px;padding:7px;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,.14);margin:0 auto}
+  .screen{border-radius:16px;overflow:hidden;height:410px;display:flex;flex-direction:column;position:relative;font-size:8px;background:#F5F8F7}
+  .stbar{height:13px;display:flex;justify-content:space-between;align-items:center;padding:0 10px;font-size:6.5px}
+  .scr-head{padding:10px 12px 8px;display:flex;justify-content:space-between;align-items:center}
+  .scr-head .app{font-size:13px;font-weight:700;letter-spacing:1px}
+  .scr-plus{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;background:rgba(255,255,255,.22);color:#fff}
+  .scr-search{margin:0 12px 8px;height:21px;border-radius:8px;display:flex;align-items:center;padding:0 8px;font-size:7.5px;gap:5px;background:rgba(15,157,143,.12);color:#5F6E6B}
+  .chiprow{display:flex;gap:5px;padding:0 12px 7px}
+  .chip{height:13px;padding:0 8px;border-radius:999px;font-size:6.5px;display:flex;align-items:center}
+  .tk-card{margin:0 12px 7px;border-radius:10px;padding:7px 9px;display:flex;gap:8px;align-items:center;background:#fff}
+  .tk-ava{width:24px;height:24px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+  .tk-name{font-size:7.5px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tk-code{font-family:Consolas,monospace;font-size:12px;letter-spacing:1.5px;font-weight:700}
+  .ring{width:19px;height:19px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:6px;border:2.5px solid var(--brand);color:var(--brand-deep)}
+  .ring.red{border-color:#C62828;color:#C62828}
+  .fab-wrap{position:absolute;left:0;right:0;bottom:27px;display:flex;justify-content:center}
+  .fab{width:31px;height:31px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 0 0 3px #F5F8F7}
+  .bottomnav{margin-top:auto;height:36px;display:flex;align-items:center;justify-content:space-around;border-top:1px solid rgba(0,0,0,.06);font-size:7px;background:#fff}
+  .bn-item{display:flex;flex-direction:column;align-items:center;gap:2px;color:#9AA8A4}
+  .bn-item.on{color:var(--brand-deep);font-weight:700}
+  .bn-pill{padding:2px 10px;border-radius:999px;background:var(--brand-t90)}
+  .pin{position:absolute;width:15px;height:15px;border-radius:50%;background:#fff;color:var(--brand-deep);font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--brand),0 2px 6px rgba(0,0,0,.3);z-index:5}
+  .pin-l{list-style:none;counter-reset:pl}
+  .pin-l li{counter-increment:pl;display:flex;gap:8px;padding:4px 0;align-items:baseline;border-bottom:1px dashed var(--line);font-size:13px}
+  .pin-l li:last-child{border-bottom:none}
+  .pin-l li::before{content:counter(pl);width:18px;height:18px;border-radius:50%;background:var(--brand-deep);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(2px)}
+  .pin-l li b{font-size:13px}
+  .pin-l li span{color:var(--muted);font-size:12.5px}
+
+  .sheet-demo{width:206px;margin:0 auto;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.15);overflow:hidden;flex-shrink:0}
+  .seg{display:flex;background:#EEF3F2;border-radius:8px;padding:2px;margin:12px 12px 8px}
+  .seg span{flex:1;text-align:center;font-size:8px;padding:4px 0;border-radius:6px;color:#5F6E6B}
+  .seg span.on{background:#fff;color:var(--brand-deep);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+  .fld{margin:0 12px 7px}
+  .fld label{font-size:7px;color:#5F6E6B;display:block;margin-bottom:2px}
+  .fld .inp{height:20px;border:1px solid #C9D6D3;border-radius:8px;display:flex;align-items:center;padding:0 7px;font-size:7.5px;color:#9AA8A4}
+  .fld .inp.ok{border-color:#0F6E56;background:#F2FAF7;color:#0F6E56}
+  .fld .inp.err{border-color:#C75B39;background:#FDF5F1;color:#C75B39}
+  .typecard{display:flex;gap:5px;margin:0 12px}
+  .typecard span{flex:1;text-align:center;font-size:7.5px;padding:6px 0;border-radius:8px;background:#F1F5F4;color:#5F6E6B}
+  .typecard span.on{background:var(--brand-t90);color:var(--brand-deep);font-weight:700}
+  .sheet-btn{margin:9px 12px 12px;height:24px;border-radius:10px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+  .sheet-title{font-size:10px;font-weight:700;padding:12px 12px 0;color:var(--ink)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .card h4{font-size:15px;font-weight:700;margin-bottom:5px}
+  .card p{font-size:13.5px;color:var(--muted)}
+  .grid{display:grid;gap:14px}
+
+  details{background:#fff;border:1px solid var(--line);border-radius:11px;margin-bottom:10px;overflow:hidden}
+  summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:'+';font-size:20px;color:var(--brand);font-weight:400;transition:transform .2s;flex-shrink:0}
+  details[open] summary::after{transform:rotate(45deg)}
+  details[open] summary{color:var(--brand-deep);border-bottom:1px solid var(--line)}
+  details .ans{padding:13px 18px;font-size:14.5px;color:#3D4B47}
+  details .ans p+p{margin-top:8px}
+
+  .backtop{position:fixed;right:22px;bottom:26px;width:44px;height:44px;border-radius:50%;background:var(--brand-deep);color:#fff;border:none;font-size:19px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s;box-shadow:0 4px 14px rgba(0,80,71,.35);z-index:60}
+  .backtop.show{opacity:1;pointer-events:auto}
+
+  footer{margin-top:44px;border-top:1px solid var(--line);padding:26px 0 46px;color:var(--faint);font-size:13px;text-align:center}
+  @media print{nav.toc,.backtop{display:none}body{background:#fff}.fn{page-break-inside:avoid}}
+</style>
+</head>
 <body>
 
-</body>
+<header class="hero">
+  <div class="logo">青</div>
+  <h1>青数安全中心 · 使用说明书</h1>
+  <p>你的两步验证小助手 —— 把登录验证码装进口袋，安全又省心</p>
+  <div class="hero-badges"><span>适用系统：Android 8.0 及以上</span><span>文档版本 v2.1 · 2026-10</span><span>图文对照 · 与 App 内帮助页同源</span></div>
+</header>
 
+<nav class="toc"><div class="wrap">
+  <a href="#s1">① 界面总览</a><a href="#s2">② 添加验证器</a><a href="#s3">③ 使用验证码</a><a href="#s4">④ 管理验证器</a><a href="#s5">⑤ 应用锁</a><a href="#s6">⑥ 外观主题</a><a href="#s7">⑦ 备份迁移</a><a href="#s8">⑧ 纯本地模式</a><a href="#s9">⑨ 其他功能</a><a href="#s10">⑩ 常见问题</a><a href="#s11">⑪ 注意事项</a>
+</div></nav>
+
+<!-- ============ ① 界面总览 ============ -->
+<section id="s1"><div class="wrap">
+  <h2><span class="ico">🗺️</span>① 界面总览：认识主界面</h2>
+  <p class="lead">先花一分钟认识「家」，后面所有功能都从这里出发。下图为界面示意图，元素位置、外观均按实际界面还原。</p>
+
+  <div class="fn">
+    <h3><span class="fi">🏠</span>1.1 首页（令牌列表）与底部导航<span class="id">功能模块 M-01</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>首页是你最常待的地方：所有账号的验证码以卡片列表展示，每张卡片实时刷新。底部导航负责在「令牌」与「我的」之间切换，中间凸起的圆形按钮是「扫一扫」。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone"><div class="screen">
+          <div class="pin" style="top:20px;right:58px">1</div>
+          <div class="pin" style="top:46px;left:26px">2</div>
+          <div class="pin" style="top:88px;left:26px">3</div>
+          <div class="pin" style="top:130px;left:40px">4</div>
+          <div class="pin" style="top:130px;right:32px">5</div>
+          <div class="pin" style="bottom:64px;left:96px">6</div>
+          <div class="pin" style="bottom:8px;left:40px">7</div>
+          <div style="background:var(--brand);height:42px;display:flex;flex-direction:column;justify-content:center">
+            <div class="stbar" style="color:rgba(255,255,255,.75)"><span>9:41</span><span>▲●■</span></div>
+            <div class="scr-head" style="padding-top:2px;color:#fff"><span class="app">青数安全中心</span><span class="scr-plus">＋</span></div>
+          </div>
+          <div class="scr-search" style="margin-top:7px">🔍 搜索服务商、账户…</div>
+          <div class="chiprow"><span class="chip" style="background:var(--brand-deep);color:#fff">全部</span><span class="chip" style="background:#E3EBE9;color:#5F6E6B">工作</span><span class="chip" style="background:#E3EBE9;color:#5F6E6B">游戏</span></div>
+          <div class="tk-card"><div class="tk-ava" style="background:#E8F0FE;color:#3B5BDB">G</div>
+            <div style="flex:1;min-width:0"><div class="tk-name">GitHub · dev@qingshu.work</div><div class="tk-code">284 915</div></div>
+            <div class="ring">18s</div></div>
+          <div class="tk-card"><div class="tk-ava" style="background:#FDEEF2;color:#C2185B">A</div>
+            <div style="flex:1;min-width:0"><div class="tk-name">AWS 控制台</div><div class="tk-code" style="color:#C62828">705 332</div></div>
+            <div class="ring red">8s</div></div>
+          <div class="fab-wrap"><div class="fab">📷</div></div>
+          <div class="bottomnav">
+            <div class="bn-item on"><span class="bn-pill">⌂</span>令牌</div><div style="width:36px"></div><div class="bn-item">⚙ 我的</div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>品牌标题条</b> <span>— 屏幕顶部主色条，左侧应用名，右侧「＋」按钮（打开添加验证器面板）。</span></div></li>
+          <li><div><b>搜索框</b> <span>— 标题条下方，圆角输入框，点击后输入账号名即时过滤列表。</span></div></li>
+          <li><div><b>标签筛选行</b> <span>— 一排胶囊标签，点选即按标签过滤；选中项变深色。左右滑动可查看更多标签。</span></div></li>
+          <li><div><b>令牌头像</b> <span>— 卡片左侧彩色方块，取账号名首字，颜色自动分配，方便快速辨认。</span></div></li>
+          <li><div><b>倒计时圆环</b> <span>— 卡片右侧圆圈显示剩余秒数，转完一圈验证码自动刷新；<b>剩余 ≤10 秒时整卡数字与圆环变红</b>。</span></div></li>
+          <li><div><b>凸起扫描钮</b> <span>— 底部中央主色圆形按钮，点它打开扫码页。</span></div></li>
+          <li><div><b>底部导航</b> <span>— 「令牌」与「我的」两个页签，当前页高亮并带胶囊底色；中间空位留给扫描钮。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 首页（浅色模式）界面示意 —— 实际颜色会跟随你选择的主题色变化</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>日常打开 App 即落在首页，向上滑动浏览全部验证器。</li>
+        <li>点左下「我的」页签进入设置；点「令牌」随时回到首页。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>首页开启了防截图保护：无法截屏 / 录屏属于正常安全行为。</li>
+        <li>列表为空或筛选无结果时会出现空状态引导，见模块 M-08。</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ② 添加验证器 ============ -->
+<section id="s2"><div class="wrap">
+  <h2><span class="ico">➕</span>② 添加验证器（三种方式）</h2>
+  <p class="lead">入口：首页右上角「＋」或底部凸起的扫描按钮。面板支持「手动填写 / 粘贴链接」两种模式，扫码则是独立全屏页面。</p>
+
+  <div class="fn">
+    <h3><span class="fi">📷</span>2.1 扫一扫添加（推荐）<span class="id">功能模块 M-02</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>网站开启两步验证时会显示一个二维码，用本功能扫描即可完成添加，全程无需手动输入，不会抄错。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone"><div class="screen" style="background:#10201E">
+          <div style="background:#005047;height:40px;display:flex;flex-direction:column;justify-content:center">
+            <div class="stbar" style="color:rgba(255,255,255,.6)"><span>9:41</span><span>▲●■</span></div>
+            <div class="scr-head" style="padding-top:1px;color:#fff"><span style="font-size:9px">‹ 返回</span><span class="app" style="font-size:11px">扫一扫</span><span style="width:17px"></span></div>
+          </div>
+          <div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center">
+            <div style="width:110px;height:110px;position:relative">
+              <div style="position:absolute;top:0;left:0;width:16px;height:16px;border-top:3px solid var(--brand);border-left:3px solid var(--brand);border-radius:4px 0 0 0"></div>
+              <div style="position:absolute;top:0;right:0;width:16px;height:16px;border-top:3px solid var(--brand);border-right:3px solid var(--brand);border-radius:0 4px 0 0"></div>
+              <div style="position:absolute;bottom:0;left:0;width:16px;height:16px;border-bottom:3px solid var(--brand);border-left:3px solid var(--brand);border-radius:0 0 0 4px"></div>
+              <div style="position:absolute;bottom:0;right:0;width:16px;height:16px;border-bottom:3px solid var(--brand);border-right:3px solid var(--brand);border-radius:0 0 4px 0"></div>
+              <div style="position:absolute;top:52px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--brand),transparent)"></div>
+              <div style="position:absolute;inset:14px;display:flex;align-items:center;justify-content:center;font-size:26px;opacity:.25">▦</div>
+            </div>
+            <div style="position:absolute;bottom:36px;color:#8FA8A3;font-size:7.5px">将二维码放入取景框内即可自动识别</div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>深色顶栏</b> <span>— 扫码页为独立全屏页面，不显示底部导航；左上角「‹ 返回」退出。</span></div></li>
+          <li><div><b>取景框</b> <span>— 屏幕中央的方框，四个角以主题色标记，中间有一条上下往返的扫描线。</span></div></li>
+          <li><div><b>自动识别</b> <span>— 对准二维码无需按任何按钮，识别成功自动返回并完成添加。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 扫码页界面示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>点首页底部凸起的 <b>📷 扫描按钮</b>（或右上角「＋」后选择扫码入口）。</li>
+        <li>把二维码对准取景框，保持 1～2 秒，自动识别后返回首页，列表即出现新卡片。</li>
+      </ul>
+      <div class="tip">💡 扫不上时：调高屏幕亮度、让二维码占取景框约 2/3、避开反光角度；二维码在另一台设备上时改用 2.2 手动填写。</div>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick"><li>首次使用会请求相机权限，拒绝后将无法扫码，可到系统设置中重新开启。</li></ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">⌨️</span>2.2 手动填写密钥<span class="id">功能模块 M-03</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>二维码扫不了（例如显示在电脑屏幕、打印纸上）时，把网站提供的<b>密钥</b>（一串字母数字）抄进 App。输入过程中 App 会实时校验格式，绿=正确、红=抄错。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone" style="background:transparent;box-shadow:none"><div style="background:#F5F8F7;border-radius:0 0 16px 16px;padding-bottom:1px">
+          <div class="sheet-demo">
+            <div class="sheet-title">添加验证条目</div>
+            <div class="seg"><span class="on">手动填写</span><span>粘贴链接</span></div>
+            <div class="fld"><label>基本信息 · 名称</label><div class="inp">例如：GitHub 工作账号</div></div>
+            <div class="fld"><label>密钥（粘贴或输入，实时校验）</label><div class="inp ok">JBSWY3DPEHPK3PXP ✓ 格式正确</div></div>
+            <div class="fld"><label>类型（三选一）</label>
+              <div class="typecard"><span class="on">TOTP</span><span>HOTP</span><span>Steam</span></div>
+            </div>
+            <div class="fld" style="margin-top:6px"><div style="font-size:7.5px;color:var(--brand-deep)">▸ 高级参数（位数 / 周期 / 算法）</div></div>
+            <div class="sheet-btn">添加</div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>分段切换</b> <span>— 面板顶部的「手动填写 / 粘贴链接」滑动选择器，白底凸起的一侧为当前模式。</span></div></li>
+          <li><div><b>密钥输入框</b> <span>— 支持长按粘贴、右侧小眼睛图标切换明文显示；<b>输入合法时边框与文字变绿</b>，非法时变红并提示原因。</span></div></li>
+          <li><div><b>类型三选卡</b> <span>— 绝大多数网站选 TOTP；Steam 平台专用选 Steam；极少数计数型选 HOTP（选中后会出现计数提示行）。</span></div></li>
+          <li><div><b>高级参数</b> <span>— 默认收起；网站有特别说明时才展开调整位数（6/8）、周期（30/60 秒）、算法。</span></div></li>
+          <li><div><b>添加按钮</b> <span>— 主色大按钮，校验通过后可点，成功后面板关闭并刷新列表。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 添加面板（手动填写模式）界面示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>点右上角「＋」打开添加面板（默认就在「手动填写」模式）。</li>
+        <li>填写名称（随意起，方便你辨认即可）。</li>
+        <li>把网站给的密钥粘贴或输入到密钥框，<b>看到绿色提示再继续</b>。</li>
+        <li>类型保持默认 TOTP（有特殊说明除外），点「添加」完成。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>密钥抄错会生成「永远对不上」的验证码，务必以绿色校验为准。</li>
+        <li>注意形近字符：数字 0 / 字母 O，数字 1 / 字母 I。</li>
+        <li><b>密钥原文通常只显示一次</b>：录入 App 后，建议在网站安全设置中把密钥另行妥善保管一份；万一录错，删除令牌重录即可。</li>
+        <li>密钥等同于账号钥匙，不要发送给任何人。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">📋</span>2.3 粘贴链接添加<span class="id">功能模块 M-04</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>有的网站不显示二维码，而是给一段以 <b>otpauth://</b> 开头的文字链接。把链接整段复制后粘贴进来，App 自动解析出账号和密钥。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面与样式说明</span>
+      <table class="ui">
+        <tr><th>元素</th><th>位置 / 外观 / 交互效果</th></tr>
+        <tr><td>模式切换</td><td>与 2.2 同一面板；点选「粘贴链接」分段，切换后表单变为单个大输入框。</td></tr>
+        <tr><td>链接输入框</td><td>占满一行、8dp 圆角；粘贴后自动校验：合法显示绿色提示，非法红色报错。</td></tr>
+        <tr><td>提交按钮</td><td>底部主色「添加」按钮（10dp 圆角），成功后面板自动关闭。</td></tr>
+        <tr><td>错误回显</td><td>解析失败时，表单底部出现红色小字错误说明，面板不关闭，可直接修改重试。</td></tr>
+      </table>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>在网站上复制以 <b>otpauth://</b> 开头的完整链接。</li>
+        <li>打开添加面板 → 切到「粘贴链接」→ 长按输入框粘贴 → 点「添加」。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick"><li>链接必须完整（从 otpauth:// 开头到结尾），缺头缺尾都会解析失败。</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ③ 使用验证码 ============ -->
+<section id="s3"><div class="wrap">
+  <h2><span class="ico">🔢</span>③ 使用验证码</h2>
+  <p class="lead">验证码是整个 App 的核心输出：一复制、二粘贴、三提交，就这么简单。</p>
+
+  <div class="fn">
+    <h3><span class="fi">📲</span>3.1 一键复制与 30 秒自动清除<span class="id">功能模块 M-05</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>点击任意令牌卡片即可复制当前验证码，并弹出「已复制」提示。为防止验证码残留在剪贴板被其他应用读取，<b>复制内容 30 秒后自动清空</b>（期间你复制了其他内容则不会被覆盖）。时间型验证码（TOTP）每 30 秒刷新；计数型（HOTP）卡片则点「使用此码」按钮复制当前码并使计数器 +1。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div style="flex:1;min-width:250px">
+          <div class="code-demo" style="margin:0;font-family:Consolas,monospace;font-size:38px;letter-spacing:6px;font-weight:800;text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px">284 915<small style="font-family:inherit;font-size:12px;color:var(--faint);letter-spacing:0;font-weight:400">点击卡片复制 · 倒计时圆环在卡片右侧</small></div>
+        </div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>点击卡片</b> <span>— 整张卡片可点，按下有轻微按压反馈，松手即复制并 Toast「已复制」。</span></div></li>
+          <li><div><b>3+3 分组</b> <span>— 6 位验证码显示为 3+3（如 284 915），8 位显示为 4+4，等宽字体居中，方便逐位核对。</span></div></li>
+          <li><div><b>临期变红</b> <span>— 剩余 ≤10 秒时数字与圆环整体变红（见示意图中 AWS 卡片），提醒你等下一组再复制。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 验证码展示与临期状态示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>先打开需要登录的网站/App，走到「输入验证码」一步。</li>
+        <li>切回本 App，点对应卡片 → 看到屏幕下方「已复制」提示。</li>
+        <li>切回网站粘贴 → 提交。建议在圆环刷新后再复制，时间更充裕。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>30 秒后剪贴板自动清空属正常安全设计，重新点卡片即可。</li>
+        <li>红色状态粘贴容易「刚好过期」，等它刷新成新数字更稳妥。</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ④ 管理验证器 ============ -->
+<section id="s4"><div class="wrap">
+  <h2><span class="ico">🗂️</span>④ 管理验证器</h2>
+  <p class="lead">搜索、标签、置顶、删除，账号多了也不乱。</p>
+
+  <div class="fn">
+    <h3><span class="fi">🔍</span>4.1 搜索与标签筛选<span class="id">功能模块 M-06</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>顶部搜索框按名称即时过滤列表；标签筛选行可按自定义分类（如「工作」「游戏」）快速缩小范围，两者可叠加使用。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面与样式说明</span>
+      <table class="ui">
+        <tr><th>元素</th><th>位置 / 外观 / 交互效果</th></tr>
+        <tr><td>搜索框</td><td>首页标题条正下方，半透明主色底的 8dp 圆角输入框；输入即过滤，无需按搜索键。</td></tr>
+        <tr><td>标签筛选行</td><td>搜索框下方一排 999dp 胶囊标签；<b>选中项主色底白字</b>，未选中浅灰底；可再次点击取消筛选。</td></tr>
+        <tr><td>无结果空态</td><td>搜索/筛选无命中时出现独立空态：<b>只提供「清除筛选」按钮，不引导添加</b>——避免你以为数据丢了。</td></tr>
+      </table>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>点搜索框 → 输入账号名任意片段 → 列表实时收窄。</li>
+        <li>点标签行中的标签 → 只看该分类；点「清除筛选」恢复全部。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">✏️</span>4.2 长按菜单：标签 / 置顶 / 删除<span class="id">功能模块 M-07</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>长按任意令牌卡片弹出「令牌操作」菜单，可修改标签、置顶常驻、删除条目。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone" style="background:transparent;box-shadow:none"><div style="background:rgba(0,0,0,.35);border-radius:16px;padding:34px 0">
+          <div class="sheet-demo" style="width:170px;border-radius:16px">
+            <div class="sheet-title" style="font-size:10px">令牌操作</div>
+            <div style="padding:4px 12px 10px">
+              <div style="font-size:8.5px;padding:8px 10px;border-radius:8px;background:#F1F5F4;margin-bottom:5px">🏷️ 标签</div>
+              <div style="font-size:8.5px;padding:8px 10px;border-radius:8px;background:#F1F5F4;margin-bottom:5px">📌 置顶</div>
+              <div style="font-size:8.5px;padding:8px 10px;border-radius:8px;background:#FDF3EE;color:#8A3A1F;font-weight:700">🗑️ 删除</div>
+            </div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>弹出方式</b> <span>— 长按卡片约半秒，屏幕变暗、底部浮出操作菜单。</span></div></li>
+          <li><div><b>标签</b> <span>— 添加或移除分类标签，保存后首页标签筛选行立即生效。</span></div></li>
+          <li><div><b>置顶</b> <span>— 该卡片固定排在列表最上方（再次操作可取消）。</span></div></li>
+          <li><div><b>删除</b> <span>— 红色高亮项，点击后需二次确认，防止误删。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 长按卡片弹出的操作菜单示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><b>打标签</b>：长按卡片调出操作菜单（或进入令牌编辑页）→ 标签 → 勾选或新建 → 保存。设好标签后，首页顶部会出现标签筛选行。</li>
+        <li><b>置顶</b>：在编辑页打开「置顶显示」，常用账号固定排在列表最前。</li>
+        <li><b>删除</b>：在编辑页中删除并二次确认。<b>删除仅移除本机令牌，已备份的文件不受影响</b>，删除前建议先确认已有备份。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>搜索与标签筛选<b>同时生效（取交集）</b>，越筛越精确。</li>
+        <li>误删且无备份时，只能去对应网站重新扫码绑定。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">🫙</span>4.3 空状态引导<span class="id">功能模块 M-08</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>第一次使用列表为空时，首页显示大号品牌圆标和「扫码添加 / 手动添加」双入口按钮，跟着引导走即可。筛选无命中时的空态则完全不同：只出现「清除筛选」，不引导添加，避免误会数据丢失。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick"><li>看到空态引导 → 点「扫码添加」直接进入 2.1 扫码流程，或点手动入口进入 2.2。</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ⑤ 应用锁 ============ -->
+<section id="s5"><div class="wrap">
+  <h2><span class="ico">🔒</span>⑤ 应用锁</h2>
+  <p class="lead">给 App 上一把锁：打开或切回应用时先验证身份。</p>
+
+  <div class="fn">
+    <h3><span class="fi">🔐</span>5.1 应用锁与防截图<span class="id">功能模块 M-09</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>开启应用锁后，每次冷启动、或从后台/息屏切回应用，都会先出现全屏验证页。支持两条通道：<b>系统验证</b>（指纹、面容、设备 PIN/图案）与<b>独立的应用锁密码</b>，任一通过即解锁。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone"><div class="screen" style="background:var(--brand);justify-content:center">
+          <div style="display:flex;flex-direction:column;align-items:center;padding:0 16px">
+            <div style="width:34px;height:34px;border-radius:50%;background:#fff;color:var(--brand-deep);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.2)">青</div>
+            <div style="color:#fff;font-size:10px;font-weight:700;letter-spacing:2px;margin:6px 0 14px">青数安全中心</div>
+            <div style="width:100%;height:24px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8.5px;color:var(--brand-deep);font-weight:700">🫆 使用指纹 / 设备密码验证</div>
+            <div style="color:rgba(255,255,255,.75);font-size:7.5px;margin:5px 0">或</div>
+            <div style="width:100%;height:24px;border-radius:10px;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:8.5px;color:#fff">⌨ 输入应用锁密码</div>
+            <div style="color:rgba(255,255,255,.6);font-size:7px;margin-top:10px">验证失败可重试 · 长时间无响应点一下屏幕重试</div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>全屏遮挡</b> <span>— 品牌色铺满全屏：白色圆 Logo + 应用名居中，下方两条验证入口并列。锁定期间内容完全不可见、不可操作。</span></div></li>
+          <li><div><b>通道 A</b> <span>— 白色主按钮：调起系统指纹/面容/PIN 验证。</span></div></li>
+          <li><div><b>通道 B</b> <span>— 描边按钮：输入你单独设置的 App 内密码（可在设置中开启）。</span></div></li>
+          <li><div><b>防截图</b> <span>— 锁定页与令牌页均无法截屏/录屏，系统会直接拒绝。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 应用锁界面示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>开启：<span class="path">我的 → 安全 → 应用锁</span>（按 App 内实际菜单为准），建议同时设置应用锁密码作备用通道。</li>
+        <li>解锁：打开 App → 按提示完成指纹或输入密码 → 自动进入首页。</li>
+      </ul>
+      <div class="tip">💡 指纹弹窗长时间没反应（个别手机系统偶发）：<b>随便点一下屏幕</b>即可强制重试；超过 15 秒看门狗也会自动复位。</div>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>忘记应用锁密码且手机无可用生物验证时，只能卸载重装并从备份恢复——请务必先做好备份。</li>
+        <li>设备没有任何锁屏密码又未设应用锁密码时，开启应用锁会要求先设置密码。</li>
+        <li>应用锁只是进入门槛，<b>不加密数据本身</b>；解锁后验证码明文显示，公共场合请留意遮挡。</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ⑥ 外观主题 ============ -->
+<section id="s6"><div class="wrap">
+  <h2><span class="ico">🎨</span>⑥ 外观与主题</h2>
+  <p class="lead">18 种主题色一键换装，深浅色模式随心切换。</p>
+
+  <div class="fn">
+    <h3><span class="fi">🌈</span>6.1 主题色（18 选 1）<span class="id">功能模块 M-10</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>在 <span class="path">我的 → 外观</span> 中点选任意颜色，整个 App 的按钮、标题条、选中态等全部随之联动换色——不是换几张图，而是整套配色重新生成。6 种基础色 + 12 种季节色：</p>
+      <p style="margin-top:6px;font-size:13.5px;color:var(--muted)">青书青 · 靛蓝 · 天蓝 · 紫罗兰 · 玫红 · 森林 ＋ 柳绿 · 桃夭 · 青碧 · 竹青 · 晴空 · 紫薇 · 桂金 · 枫赤 · 栗褐 · 霜蓝 · 黛青 · 玄灰</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone" style="background:transparent;box-shadow:none"><div style="background:#F5F8F7;border-radius:16px;padding:10px">
+          <div style="background:#fff;border-radius:12px;padding:12px">
+            <div style="font-size:8.5px;font-weight:700;margin-bottom:8px">主题色</div>
+            <div style="display:flex;gap:6px;margin-bottom:6px">
+              <div style="flex:1;height:20px;border-radius:50%;background:#0F9D8F;box-shadow:0 0 0 2.5px var(--ink);display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px">✓</div>
+              <div style="flex:1;height:20px;border-radius:50%;background:#3B5BDB"></div>
+              <div style="flex:1;height:20px;border-radius:50%;background:#0EA5E9"></div>
+              <div style="flex:1;height:20px;border-radius:50%;background:#8B5CF6"></div>
+              <div style="flex:1;height:20px;border-radius:50%;background:#E11D6F"></div>
+              <div style="flex:1;height:20px;border-radius:50%;background:#166534"></div>
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:6px">
+              <div style="flex:1;height:20px;border-radius:50%;background:#A3C65C"></div><div style="flex:1;height:20px;border-radius:50%;background:#E88BA5"></div><div style="flex:1;height:20px;border-radius:50%;background:#3FA48C"></div><div style="flex:1;height:20px;border-radius:50%;background:#4D9E6E"></div><div style="flex:1;height:20px;border-radius:50%;background:#35A3DB"></div><div style="flex:1;height:20px;border-radius:50%;background:#9B6FC3"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <div style="flex:1;height:20px;border-radius:50%;background:#D2A24C"></div><div style="flex:1;height:20px;border-radius:50%;background:#C75B39"></div><div style="flex:1;height:20px;border-radius:50%;background:#8A6642"></div><div style="flex:1;height:20px;border-radius:50%;background:#6E8CA8"></div><div style="flex:1;height:20px;border-radius:50%;background:#33608C"></div><div style="flex:1;height:20px;border-radius:50%;background:#55616E"></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>色卡网格</b> <span>— 圆形色卡每行 6 个、共 3 行；第一行为基础色，后两行为季节色。</span></div></li>
+          <li><div><b>选中态</b> <span>— 当前颜色带深色描边 + 白色对勾（如示意第一颗）。</span></div></li>
+          <li><div><b>即时生效</b> <span>— 点选后无需保存，全界面立即换色；下次打开仍保持。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 外观设置中的主题色选择器示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick"><li><span class="path">我的 → 外观</span> → 点任意色卡 → 全界面即时换色，完成。</li></ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">🌙</span>6.2 深色模式<span class="id">功能模块 M-11</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>深色模式下界面自动换为暗色配色：标题条变为深色块、卡片转深灰、验证码转为亮色调，夜间观看不刺眼。主题色仍保留你选择的色相。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面与样式说明</span>
+      <table class="ui">
+        <tr><th>元素</th><th>深色模式下的表现</th></tr>
+        <tr><td>标题条</td><td>由亮主色变为深一档的主题色块，底部有分割线与内容区分。</td></tr>
+        <tr><td>卡片与列表</td><td>深灰卡片浮在更深的页面底色上，层次依然清晰。</td></tr>
+        <tr><td>验证码</td><td>转为亮色主题字色，临期仍为亮红色警示。</td></tr>
+        <tr><td>切换方式</td><td>跟随系统深色模式自动切换，也可在系统/应用设置中手动指定。</td></tr>
+      </table>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ⑦ 备份迁移 ============ -->
+<section id="s7"><div class="wrap">
+  <h2><span class="ico">☁️</span>⑦ 备份与迁移</h2>
+  <p class="lead">备份做得到位，换机、刷机、丢手机都不慌。入口：<span class="path">我的 → 云备份</span>。</p>
+
+  <div class="fn">
+    <h3><span class="fi">💾</span>7.1 本机加密备份（.qsc 文件）<span class="id">功能模块 M-12</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>把全部令牌导出为一个<b>加密的 .qsc 文件</b>，存到本机或自行传到任意位置，<b>不经过任何云端</b>。恢复时用同一个备份密码解密还原。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意</span>
+      <div class="fig">
+        <div class="phone" style="background:transparent;box-shadow:none"><div style="background:#F5F8F7;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px">
+          <div style="background:#fff;border-radius:12px;padding:12px">
+            <div style="font-size:8.5px;font-weight:700;margin-bottom:3px">本机备份</div>
+            <div style="font-size:7px;color:#8A9793;margin-bottom:7px">.qsc 加密文件 · 最多保留 10 份自动裁剪</div>
+            <div style="display:flex;gap:6px">
+              <div style="flex:1;height:22px;border-radius:10px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700">导出</div>
+              <div style="flex:1;height:22px;border-radius:10px;background:var(--brand-t90);color:var(--brand-deep);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700">恢复</div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:12px">
+            <div style="font-size:8.5px;font-weight:700;margin-bottom:3px">私有 Git 仓库</div>
+            <div style="font-size:7px;color:#8A9793">GitHub / Gitee · 点击进入配置详情</div>
+          </div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>本机备份卡</b> <span>— 「导出 / 恢复」双按钮并排；导出前需设置备份密码。</span></div></li>
+          <li><div><b>自动裁剪</b> <span>— 备份文件按时间命名，App 自动保留最近 10 份，无需手动清理。</span></div></li>
+          <li><div><b>私有 Git 仓库卡</b> <span>— 首次使用显示添加引导；添加后此处变为仓库列表（每行可进详情或删除），详见 7.2。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 云备份页界面示意</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><b>导出</b>：云备份页 → 本机 .qsc 文件备份，首次需设置备份密码，之后点<b>「导出到本机（.qsc）」</b>选择保存位置即可。</li>
+        <li><b>恢复</b>：点<b>「从本机文件恢复（.qsc）」</b>→ 选择文件 → 输入备份密码 → 等待导入完成（详见 7.3）。</li>
+        <li>备份文件按时间命名、自动保留最近 <b>10 份</b>并裁剪更早的，无需手动管理。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li><b>备份密码忘记 = 备份永久打不开</b>（加密保护，任何人都无法解密），请务必牢记。</li>
+        <li>导出的是<b>导出那一刻的快照</b>：之后令牌有增删改，需重新导出才是最新状态。</li>
+        <li>本机会加密记住密码，方便重复导出；但换机或重装后仍需输入密码原文。</li>
+        <li>.qsc 文件本身是敏感文件，请存放在可信位置。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">🐙</span>7.2 备份到私有 Git 仓库<span class="id">功能模块 M-13</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>把令牌<b>加密后备份到你自己的</b> GitHub / Gitee 私有仓库——App 只和你的仓库打交道，<b>不经过任何第三方服务器</b>。核心特性：</p>
+      <ul class="tick">
+        <li><b>多仓库</b>：同一个 GitHub / Gitee 账号可添加多个仓库，各自独立存放与恢复；</li>
+        <li><b>自动同步</b>：开启后每次<b>添加令牌</b>都会自动加密上传；也可随时「立即备份」；</li>
+        <li><b>版本化</b>：每次备份都是一个<b>带时间戳的新 .qsc 文件</b>，旧备份不会被覆盖，云端自动保留最近 <b>10 份</b>；</li>
+        <li><b>可迁移</b>：支持把仓库配置导出为 JSON 文件，在其它设备上批量导入，免去逐项重填。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt fig">界面示意（云备份设置页）</span>
+      <div class="fig">
+        <div class="phone" style="background:transparent;box-shadow:none"><div style="background:#F5F8F7;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:7px">
+          <div style="background:#fff;border-radius:12px;padding:10px">
+            <div style="font-size:7.5px;color:#5F6E6B;line-height:1.5">令牌加密后存入你自己的 GitHub / Gitee 仓库，不经过任何第三方服务器。同一个服务商可以添加多个仓库。</div>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:7px">
+            <div style="width:16px;height:16px;border-radius:4px;background:#24292F;color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center">GH</div>
+            <div style="flex:1">
+              <div style="font-size:8.5px;font-weight:700">我的工作仓库</div>
+              <div style="font-size:7px;color:#8A9793">GitHub · qingshu/backup</div>
+              <div style="display:flex;gap:4px;margin-top:3px">
+                <span style="font-size:6.5px;padding:1px 6px;border-radius:999px;background:#E5F4F1;color:#0F9D8F">✓ 已授权</span>
+                <span style="font-size:6.5px;padding:1px 6px;border-radius:999px;background:#E5F4F1;color:#0F9D8F">自动同步</span>
+              </div>
+            </div>
+            <div style="color:#E11D6F;font-size:10px">🗑</div>
+          </div>
+          <div style="border:1.5px dashed #B9CCC7;border-radius:10px;height:24px;display:flex;align-items:center;justify-content:center;font-size:8.5px;color:#0F9D8F;font-weight:700">＋ 添加仓库</div>
+        </div></div>
+        <div class="fig-note"><ul class="pin-l">
+          <li><div><b>顶部说明卡</b> <span>— 一句话说明云端备份原理；右上角 ⓘ 图标进入「云备份使用守则」帮助页。</span></div></li>
+          <li><div><b>仓库行</b> <span>— 每行一个仓库：logo ＋ 自定义名称 ＋ 平台·仓库路径 ＋ 两枚状态徽章（已授权/未授权、自动同步/手动），行尾红色删除钮；点行进入仓库详情页。</span></div></li>
+          <li><div><b>添加仓库</b> <span>— 点击弹出选择框：GitHub / Gitee 二选一（已添加过会显示数量）；对话框底部还有 JSON 批量导入 / 导出入口。</span></div></li>
+        </ul></div>
+        <div class="fig-cap">▲ 云备份设置页界面示意（配置完成后状态）</div>
+      </div>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <p style="margin:2px 0 6px"><b>第一步：准备工作（在 GitHub / Gitee 网页上）</b></p>
+      <ul class="tick">
+        <li>建一个<b>私有仓库</b>（公开仓库不推荐，见注意事项）；</li>
+        <li>生成<b>访问令牌（PAT）</b>并授予仓库读写权限，复制备用——授权时要用；若使用 GitHub 浏览器授权则可跳过这步。</li>
+      </ul>
+      <p style="margin:8px 0 6px"><b>第二步：添加并配置仓库</b></p>
+      <ul class="tick">
+        <li><span class="path">我的 → 云备份</span> → 点<b>「添加仓库」</b>→ 选择 GitHub 或 Gitee；</li>
+        <li>填写四项：<b>名称</b>（可空，为空时显示仓库路径）、<b>仓库</b>（owner/repo 格式）、<b>分支</b>（缺省 main）、<b>目录</b>（缺省 /qingshu-backup）；</li>
+        <li><b>授权</b>二选一：<b>浏览器授权</b>（GitHub 专属——打开 GitHub 设备授权页，输入屏幕显示的验证码即可，无需填密码）或 <b>PAT 令牌</b>（粘贴访问令牌，保存时<b>立即校验</b>，无效或过期马上提示，不会等到备份时才失败）；</li>
+        <li><b>设置备份密码</b>：用于加密备份文件，设置后加密保存在本机，之后备份/恢复不再重复输入（换机恢复需输入同一密码原文）；</li>
+        <li>打开<b>「启用云备份」</b>开关（未授权或未填仓库时开关不可用，提示「请先完成授权并填写仓库」）；</li>
+        <li>点<b>「保存并查看备份列表」</b>：App 会先做仓库预检（检查令牌读写权限、分支是否存在），通过后自动进入该仓库的备份列表页。</li>
+      </ul>
+      <p style="margin:8px 0 6px"><b>第三步：日常备份（仓库备份列表页）</b></p>
+      <ul class="tick">
+        <li>页面顶部显示该仓库的仓库 / 分支 / 目录与三枚徽章：<b>授权状态</b>、<b>自动同步/手动</b>、<b>密码已存/恢复时询问</b>；</li>
+        <li><b>自动同步</b>：开启「启用云备份」后，每次<b>添加令牌</b>自动加密上传一份新备份（编辑、删除令牌不触发，见注意事项）；</li>
+        <li><b>手动备份</b>：点<b>「立即备份」</b>随时生成一份新 .qsc 文件；</li>
+        <li><b>备份文件列表</b>：每行显示文件名（即备份时间，如 2026-9-13 16:12:04 备份），行尾两个按钮——<b>↺ 恢复这一份</b>、<b>🗑 删除这一份</b>（删除需确认且不可撤销）；列表只显示 .qsc 备份文件，仓库里的 README 等无关文件不会出现；</li>
+        <li><b>恢复最新</b>：点「恢复最新」一键恢复时间最近的一份；</li>
+        <li><b>清理旧备份</b>：点「清理旧备份」可手动删除超出保留数量的更早备份（保留最近 10 份），备份成功后 App 也会自动裁剪；</li>
+        <li>右上角齿轮随时回到仓库配置页修改名称、仓库、分支、目录或授权。</li>
+      </ul>
+      <p style="margin:8px 0 6px"><b>第四步：JSON 配置导入 / 导出（跨设备迁移仓库配置）</b></p>
+      <p style="margin:0 0 6px">适用场景：换新手机或多台设备使用时，不必逐个重新填仓库、授权——把已配置的仓库导出成一个 JSON 文件，在新设备上一键导入。入口在<b>「添加仓库」弹出框的底部</b>（云备份页 → 点「添加仓库」即可看到「导入 JSON 文件」与「导出 JSON 配置文件」两张卡）。</p>
+      <ul class="tick">
+        <li><b>导出</b>：点「导出 JSON 配置文件」→ 设置口令（<b>默认加密导出</b>，导入时需输入同一口令才能还原；也可打开「以明文导出」开关，会显示红色警告）→ 选择保存位置，生成 <b>qingshu-backup-config.json</b>。文件只包含<b>已授权</b>的仓库及其访问令牌，保证导出的文件可再次导入还原；一个已授权仓库都没有时会提示「没有已授权的仓库可导出」。</li>
+        <li><b>导入</b>：点「导入 JSON 文件」→ 选择文件。App 会自动识别文件类型：<b>加密文件</b>会弹出「输入导出口令」框（口令错误会提示重新输入，可直接重试）；<b>普通 JSON</b> 直接解析。解析合并期间有进度提示（读取文件 → 解析 → 合并），完成后 Toast 汇报结果（新增几条、覆盖几条、令牌更新几条）。</li>
+        <li><b>导入成功后立即可用</b>：访问令牌随配置一并导入，导入的仓库直接处于「已授权」状态，无需再走授权流程，进仓库页即可备份。</li>
+      </ul>
+      <p style="margin:8px 0 6px"><b>JSON 文件怎么写（自行手工编辑时）</b>——一个数组，每项一个仓库，允许加注释：</p>
+<pre style="background:#F5F8F7;border-radius:8px;padding:10px;font-family:Consolas,'Courier New',monospace;font-size:12px;line-height:1.7;overflow-x:auto">[
+  {
+    "name": "青数官方仓库",   <span style="color:#8A9793">// 显示名称，可省略（省略时显示仓库路径）</span>
+    "type": "github",          <span style="color:#8A9793">// 服务商：github / gitee，不区分大小写</span>
+    "repo": "owner/repo",      <span style="color:#8A9793">// 仓库路径，必填</span>
+    "token": "ghp_xxxxxxxx",   <span style="color:#8A9793">// 访问令牌（PAT），必填</span>
+    "branch": "main",          <span style="color:#8A9793">// 分支，省略时默认 main</span>
+    "dir": "/qingshu-backup"   <span style="color:#8A9793">// 远端目录，省略时默认 /qingshu-backup</span>
+  }
+]</pre>
+      <div class="fig-note" style="margin-top:8px"><ul class="pin-l">
+        <li><div><b>覆盖合并规则</b> <span>— 导入不会全量替换：与现有仓库「服务商 ＋ 仓库路径」相同的条目<b>覆盖</b>原配置（保留原有的启用开关等状态，令牌也按文件为准更新，适合轮换令牌后重新导入）；其余条目作为<b>新增</b>追加；同一文件内重复出现的条目以后一条为准。</span></div></li>
+        <li><div><b>容错跳过</b> <span>— 个别条目格式不对<b>不会导致整体失败</b>：不支持的服务商（仅 github / gitee）、仓库不是 owner/repo 格式的条目会被跳过，并逐条提示「第 N 项：…已跳过」，其余条目正常导入。</span></div></li>
+        <li><div><b>安全提醒</b> <span>— JSON 文件里是<b>明文或口令加密的访问令牌</b>，等同于你仓库的钥匙：建议始终用加密导出；明文文件切勿发到聊天群、网盘等不安全位置。</span></div></li>
+      </ul></div>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>仓库必须保持<b>私有</b>：备份文件虽已加密，也不建议放到公开仓库。</li>
+        <li><b>自动同步只在「添加令牌」时触发</b>，编辑、删除等操作不会触发——做了重要变更后请到仓库页点「立即备份」。</li>
+        <li><b>移除仓库 ≠ 删除备份</b>：无论在列表行还是配置页移除，都只删除本机配置、本机密码与授权令牌，<b>远端仓库中的备份文件不受影响</b>。</li>
+        <li>备份密码是唯一解密钥匙，忘记后云端备份将永久无法解密；本机加密记住密码，换机后需输入密码原文。</li>
+        <li>导出的 JSON 配置文件<b>包含仓库访问令牌</b>，等同于仓库钥匙，请妥善保管；建议使用加密导出。</li>
+        <li>纯本地模式下云端备份默认关闭；如需使用，可在云备份页打开「允许在纯本地模式下使用云端备份」放行（这是纯本地模式下唯一可恢复联网的功能，开启后可手动备份/恢复，自动同步需另在各仓库页开启）。</li>
+        <li>云端与本机 .qsc 文件共用同一加密格式，<b>可互相恢复</b>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">📥</span>7.3 恢复备份<span class="id">功能模块 M-19</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>从备份文件把令牌恢复到本机。适用于换新手机、重装应用、误删令牌后找回。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><b>本机备份</b>：<span class="path">我的 → 云备份 → 从本机文件恢复（.qsc）</span>，选择文件并输入备份密码。</li>
+        <li><b>云备份</b>：进入对应仓库的备份列表，选任意一份带时间戳的 .qsc 恢复。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>恢复按<b>密钥去重后合并</b>到本机：已存在的令牌自动跳过，<b>不会覆盖、不会重复</b>，可放心操作。</li>
+        <li>本机保存过密码可直接使用；换机或重装后需要输入密码原文。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">✅</span>7.4 验证备份是否可用<span class="id">功能模块 M-20</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>确认备份文件完好、密码正确，<b>避免需要恢复时才发现不可用</b>。建议在换机、删除应用、大量修改令牌等重要操作之前做一次。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>用<b>「从本机文件恢复」试导入一次</b>——已存在的令牌会自动跳过，<b>无任何副作用</b>。</li>
+        <li>云备份：打开仓库的备份列表，确认最近一次 .qsc 文件存在。</li>
+      </ul>
+      <div class="tip">💡 导出成功不代表内容正确，<b>试恢复是最可靠的验证手段</b>。建议完成重要录入后验证一次。</div>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">📱</span>7.5 换新手机完整流程<span class="id">功能模块 M-14</span></h3>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><b>旧手机</b>：先做一次备份（本机导出 .qsc，或触发仓库同步）。</li>
+        <li><b>传输</b>：.qsc 文件通过数据线/网盘/文件传输助手传到新手机。</li>
+        <li><b>新手机</b>：安装 App → 云备份 → 恢复 → 选文件 + 输入备份密码。</li>
+        <li><b>核对</b>：抽查一个账号登录验证码有效。</li>
+        <li><b>收尾</b>：确认无误后再卸载旧手机上的 App。</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ⑧ 纯本地模式 ============ -->
+<section id="s8"><div class="wrap">
+  <h2><span class="ico">🛰️</span>⑧ 纯本地模式</h2>
+
+  <div class="fn">
+    <h3><span class="fi">📴</span>8.1 完全离线使用<span class="id">功能模块 M-15</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>让应用<b>彻底不联网</b>，满足极致隐私需求：开启后 App 不发起任何网络请求，首页顶部会<b>常驻一条提示横幅</b>；账号等联网入口也会自动隐藏。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><span class="path">我的 → 纯本地模式</span> → 打开开关并确认。</li>
+        <li>开启后云备份默认一并关闭（可在云备份设置中<b>单独放行</b>）；关闭该模式即恢复联网。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt fig">功能影响一览</span>
+      <table class="ui">
+        <tr><th>状态</th><th>功能</th></tr>
+        <tr><td>⛔ 停用</td><td>版本更新检查、登录 / 注册、扫码（扫码登录）、时间同步等联网功能</td></tr>
+        <tr><td>✅ 不受影响</td><td>令牌增删改、验证码生成与复制、应用锁、本机备份（导出 .qsc）</td></tr>
+        <tr><td>ℹ️ 说明</td><td>该限制<b>只作用于本应用</b>，不影响设备上其它应用</td></tr>
+      </table>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ⑨ 其他功能 ============ -->
+<section id="s9"><div class="wrap">
+  <h2><span class="ico">🧩</span>⑨ 其他功能</h2>
+
+  <div class="fn">
+    <h3><span class="fi">�️</span>9.1 扫码登录<span class="id">功能模块 M-21</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>在 PC 端登录账号时，不用输密码：<b>PC 端登录页生成二维码 → 手机「扫一扫」扫描 → 在手机上确认登录</b>，全程可随时取消。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li>PC 端登录页出现登录二维码后，打开本 App 的「扫一扫」。</li>
+        <li>扫描成功后手机上会弹出确认页，核对信息后点确认即完成 PC 登录。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li><b>确认前务必核对 PC 端页面显示的账号信息</b>，确认是本人发起的登录。</li>
+        <li>仅识别对应类型的登录二维码；<b>纯本地模式下扫码登录不可用</b>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">🕐</span>9.2 时间同步<span class="id">功能模块 M-22</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>验证码依赖准确的手机时间，<b>时钟偏差过大会导致验证码被网站拒绝</b>。时间同步页帮你校对：并排显示<b>您的手机时间</b>与<b>网络标准时间</b>（两者同步走字），一眼看出偏差。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><span class="path">我的 → 时间同步</span> 打开对比页，观察两个时钟的差距。</li>
+        <li>若相差超过 1 分钟：到<b>系统设置</b>开启「自动获取网络时间」或手动校准。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>相差 <b>1 分钟内</b>即可保证令牌正常工作，不必追求分秒不差。</li>
+        <li>标准时间取自网络站点，<b>纯本地模式下不可用</b>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">🫧</span>9.3 悬浮球<span class="id">功能模块 M-23</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>应用退到后台后，在屏幕边缘保留一个<b>可拖拽的悬浮徽标</b>，随时快速回到安全中心——特别适合扫码登录 PC、跨应用复制验证码等需要频繁切换应用的场景。</p>
+    </div>
+    <div class="blk"><span class="bt st">操作步骤</span>
+      <ul class="tick">
+        <li><span class="path">我的 → 悬浮球</span> 打开主开关（需授予「显示在其它应用上层」权限）。</li>
+        <li><b>悬浮徽标</b>子开关控制屏幕边缘的悬浮球；关闭后仅保留状态栏常驻通知。</li>
+        <li><b>点按</b>徽标唤起应用，<b>长按</b>展开快捷面板，<b>拖拽</b>可调整位置。</li>
+      </ul>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick">
+        <li>主开关关闭后子开关一并隐藏；不需要时建议关闭，减少常驻消耗。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">�</span>9.4 帮助中心与开源许可<span class="id">功能模块 M-16</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p><span class="path">我的 → 帮助</span> 收录高频问题速查；「关于」页可查看版本信息与开源许可清单（App 使用了多个开源组件，依法在此公开）。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面与样式说明</span>
+      <table class="ui">
+        <tr><th>元素</th><th>位置 / 外观 / 交互效果</th></tr>
+        <tr><td>帮助页</td><td>与首页同款品牌标题条；内容为可展开的问题卡片（10dp 圆角）。</td></tr>
+        <tr><td>许可页</td><td>列表卡片展示各开源组件名称与许可；组件名旁有小型圆角徽章。</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">🔄</span>9.5 应用内更新<span class="id">功能模块 M-17</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>发现新版本时可在应用内直接下载更新，无需去应用市场。下载进度以进度条实时展示，更新失败可重试，也可选择「稍后」继续使用当前版本。</p>
+    </div>
+    <div class="blk"><span class="bt fig">界面与样式说明</span>
+      <table class="ui">
+        <tr><th>元素</th><th>位置 / 外观 / 交互效果</th></tr>
+        <tr><td>更新抽屉</td><td>从屏幕侧边/底部滑出的面板：显示新版本说明与「立即更新」主色按钮（10dp 圆角）。</td></tr>
+        <tr><td>进度条</td><td>细圆角进度条（4dp 高），下载中实时增长。</td></tr>
+        <tr><td>失败兜底</td><td>下载失败显示错误与重试按钮；「稍后」可关闭面板，不影响正常使用。</td></tr>
+      </table>
+    </div>
+    <div class="blk"><span class="bt wn">注意事项</span>
+      <ul class="tick"><li>只从 App 内更新入口或可信渠道获取新版本，谨防仿冒安装包。</li></ul>
+    </div>
+  </div>
+
+  <div class="fn">
+    <h3><span class="fi">👤</span>9.6 账户登录 / 注册<span class="id">功能模块 M-18</span></h3>
+    <div class="blk"><span class="bt ov">功能概述</span>
+      <p>如需使用跨设备账户能力，可在「我的」中注册/登录。登录除常规验证码外还会进行两步安全验证，与 App 的安全基调一致。<b>纯本地模式下登录 / 注册不可用。</b></p>
+    </div>
+    <div class="blk"><span class="bt fig">界面与样式说明</span>
+      <table class="ui">
+        <tr><th>元素</th><th>位置 / 外观 / 交互效果</th></tr>
+        <tr><td>品牌头部</td><td>登录页顶部：白色圆形「青」Logo + 标题 + 副标题，主题色背景。</td></tr>
+        <tr><td>上浮卡片</td><td>头部下方向上叠放 32dp 的白色圆角卡片，承载表单；输入框 8dp 圆角，主按钮 48dp 高。</td></tr>
+        <tr><td>验证码通道</td><td>发送验证码后按钮进入 60 秒倒计时禁用态，结束后恢复可点。</td></tr>
+        <tr><td>错误提示</td><td>表单内红色提示条即时回显错误原因。</td></tr>
+      </table>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ ⑩ FAQ ============ -->
+<section id="s10"><div class="wrap">
+  <h2><span class="ico">❓</span>⑩ 常见问题（FAQ）</h2>
+  <p class="lead">与 App 内「我的 → 关于 → 帮助」按同一场景分为四组，内容同源；点开问题看答案。</p>
+
+  <h3>🔐 令牌与验证码</h3>
+  <details open><summary>如何添加令牌？</summary><div class="ans"><p>点首页右上角「+」，三选一：①「扫一扫」扫描 PC 端二维码（单码自动识别并填入）；②粘贴 otpauth:// 链接后导入；③手动输入账户名与密钥。<b>密钥原文通常只显示一次，请另行妥善保管</b>；录错密钥生成的码不会被网站认可，删除令牌重录即可。</p></div></details>
+  <details><summary>验证码怎么刷新和复制？</summary><div class="ans"><p>点按令牌卡片即可复制验证码。TOTP 每 30 秒自动刷新，卡片右上角圆环为剩余时间；HOTP 为事件型，点「使用此码」复制当前码并使计数 +1。<b>圆环快走完时建议等下一轮新码再输入</b>；复制的验证码 30 秒后自动清空剪贴板（期间复制了其它内容则不覆盖），请尽快粘贴。</p></div></details>
+  <details><summary>令牌多了怎么管理（置顶 / 标签 / 搜索 / 删除）？</summary><div class="ans"><p>编辑令牌时打开「置顶显示」让常用令牌排在最前；设置标签后列表顶部出现标签筛选行，点标签即可筛选；顶部搜索框可按账户名或标签搜索；删除在编辑页中。<b>搜索与标签筛选同时生效（取交集）</b>；删除仅移除本机令牌，已备份的文件不受影响，删除前建议先确认已有备份。</p></div></details>
+  <details><summary>Steam 的验证码不太一样？</summary><div class="ans"><p>Steam 使用专用格式（5 位字母数字）。添加时类型选 <b>Steam</b>；其他网站保持默认 TOTP。</p></div></details>
+  <details><summary>HOTP 验证码对不上了？</summary><div class="ans"><p>HOTP 按次数递增、不看时间，计数错位后最简单的办法是删掉重新扫码添加。</p></div></details>
+
+  <h3>💾 备份与恢复</h3>
+  <details><summary>本机备份怎么做？</summary><div class="ans"><p>「我的 → 云备份」进入「本机 .qsc 文件备份」：首次需设置备份密码，之后点「导出到本机（.qsc）」选择保存位置即可。<b>导出的是那一刻的快照</b>，令牌变化后需重新导出；.qsc 是敏感文件，请存放在可信位置。</p></div></details>
+  <details><summary>云备份怎么同步？</summary><div class="ans"><p>「我的 → 云备份」绑定你的 GitHub / Gitee 私有仓库 → 打开「自动同步」：此后<b>每次添加令牌都会自动加密上传</b>；也可随时点「立即备份」。每次备份都是一个带时间戳的新 .qsc 文件，旧备份不会被覆盖。<b>「自动同步」只在添加令牌时触发</b>，编辑、删除等操作不触发。</p></div></details>
+  <details><summary>如何恢复备份？</summary><div class="ans"><p>本机备份：「我的 → 云备份 → 从本机文件恢复（.qsc）」选择文件并输入备份密码；云备份：进入对应仓库，在备份列表中选任意一份 .qsc 恢复。恢复按密钥去重后<b>合并</b>到本机，已存在的令牌自动跳过，不会覆盖或重复。</p></div></details>
+  <details><summary>怎么确认备份真的可用？</summary><div class="ans"><p>用「从本机文件恢复」试导入一次——已存在的令牌会自动跳过，<b>无副作用</b>；云备份先打开仓库的备份列表，确认最近一次 .qsc 文件存在。<b>导出成功不代表内容正确</b>，试恢复是最可靠的验证手段，建议完成重要录入后验证一次。</p></div></details>
+  <details><summary>忘记备份密码怎么办？</summary><div class="ans"><p><b>没有任何找回途径</b>。备份密码是唯一解密钥匙，不会保存在远端；本机会加密记住密码方便重复导出，但换机或重装后仍需输入密码原文。请把密码记录在可靠的密码管理器中，忘记后对应备份文件将永久无法解密。</p></div></details>
+  <details><summary>误删了验证器还能找回吗？</summary><div class="ans"><p>有备份就能恢复（见上文「如何恢复备份」）；没有备份只能去对应网站重新扫码绑定。建议定期备份并在换机、删除应用等重要操作前先试恢复验证一次。</p></div></details>
+
+  <h3>🛡️ 安全与隐私</h3>
+  <details><summary>密钥与数据是怎么存储的？</summary><div class="ans"><p>所有密钥经 <b>SQLCipher 加密存储在本机数据库</b>，数据库密钥由系统 Keystore 保护，<b>不经过任何服务器</b>——开发者也看不到你的数据。请自行妥善保管各网站的密钥原文（一般可在网站安全设置中重新生成）；<b>卸载应用或清除数据会删除本机数据库</b>，操作前请先备份导出。</p></div></details>
+  <details><summary>应用锁能保护什么？</summary><div class="ans"><p>防止他人直接打开应用查看令牌。「我的 → 应用锁」开启：设备支持指纹/人脸或锁屏凭据时直接生效，否则需先设置应用锁密码。每次进入应用（冷启动或从后台切回）都要验证，任一通道通过即可。<b>它只是进入门槛，不加密数据本身</b>；解锁后验证码明文显示，公共场合请注意遮挡。</p></div></details>
+  <details><summary>纯本地模式是什么？</summary><div class="ans"><p>让应用彻底不联网，满足极致隐私需求。「我的 → 纯本地模式」开启并确认后，账号等联网入口自动隐藏，云备份默认一并关闭（可在云备份设置中单独放行）。<b>停用：版本更新检查、登录/注册、扫码、时间同步</b>；<b>不受影响：令牌增删改、验证码生成、应用锁、本机备份</b>；该限制只作用于本应用，不影响设备上其它应用。</p></div></details>
+  <details><summary>为什么这个页面不能截屏？</summary><div class="ans"><p>应用锁与令牌页开启了系统级防截图保护，截屏/录屏会被系统拒绝——这是防止验证码被恶意应用偷走的安全设计。</p></div></details>
+  <details><summary>应用锁指纹弹窗没反应？</summary><div class="ans"><p>点一下屏幕即可强制重试；App 内置 15 秒看门狗也会自动复位重发验证请求。</p></div></details>
+
+  <h3>✨ 更多功能</h3>
+  <details><summary>扫码登录是什么？</summary><div class="ans"><p>在 PC 端扫码确认登录，无需输入账号密码：PC 端登录页生成二维码 → 手机打开「扫一扫」扫描 → 在手机上确认登录，全程可随时取消。<b>确认前请核对 PC 端页面显示的账号信息</b>；仅识别二维码类型；纯本地模式下扫码登录不可用。</p></div></details>
+  <details><summary>时间同步是做什么的？</summary><div class="ans"><p>TOTP 验证码依赖准确时间，偏差过大会导致验证码被网站拒绝。「我的 → 时间同步」打开后，弹窗并排显示您的手机时间与网络标准时间（两者同步走字）；<b>相差超过 1 分钟</b>请到系统设置校准手机时间，相差 1 分钟内即可保证令牌正常工作。标准时间取自网络站点，纯本地模式下不可用。</p></div></details>
+  <details><summary>悬浮球是什么？</summary><div class="ans"><p>应用退到后台后，在屏幕边缘保留可拖拽的悬浮徽标，随时快速回到安全中心。「我的 → 悬浮球」开启主开关（需授予「显示在其它应用上层」权限）；「悬浮徽标」子开关关闭后仅保留状态栏常驻通知。<b>点按徽标唤起应用，长按展开快捷面板，拖拽可调整位置</b>；主开关关闭后子开关一并隐藏；不需要时建议关闭以减少常驻消耗。</p></div></details>
+</div></section>
+
+<!-- ============ ⑪ 注意事项 ============ -->
+<section id="s11"><div class="wrap">
+  <h2><span class="ico">🛡️</span>⑪ 注意事项与安全建议</h2>
+
+  <div class="warnbox big">🚨 <b>三条铁律</b><br>
+  1️⃣ <b>定期备份</b> —— 手机丢失、损坏、重装时，备份是唯一救命稻草；<br>
+  2️⃣ <b>记牢备份密码</b> —— 忘记密码等于备份作废，建议密码管理器 + 纸质各存一份；<br>
+  3️⃣ <b>换机先备份、后卸载</b> —— 新手机恢复成功并抽查无误后，再动旧手机。</div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:14px">
+    <div class="card"><h4>🔑 密钥 = 账号钥匙</h4><p>不要把密钥文本发到聊天群或公开网盘。谁拿到密钥，谁就能生成你的验证码。</p></div>
+    <div class="card"><h4>�️ 数据如何存储</h4><p>密钥经 SQLCipher 加密存在本机数据库，数据库密钥由系统 Keystore 保护，不经任何服务器。卸载或清除数据会删库，操作前先备份。</p></div>
+    <div class="card"><h4>�� 开启应用锁</h4><p>验证码本身就是安全防线，别让它裸奔。指纹 + 备用密码双保险。</p></div>
+    <div class="card"><h4>⏰ 留意红色状态</h4><p>数字变红说明马上刷新，此时粘贴容易过期；稍等一秒自动换新。</p></div>
+    <div class="card"><h4>🗑️ 删除前想一下</h4><p>确认对应网站的两步验证仍在生效，且你有备份或备用登录方式。</p></div>
+    <div class="card"><h4>💾 只用官方渠道</h4><p>安装包与更新只走 App 内入口或可信渠道，谨防仿冒。</p></div>
+    <div class="card"><h4>🙋 遇到问题</h4><p>App 内「我的 → 关于 → 帮助」与本说明书随时可查。</p></div>
+  </div>
+</div></section>
+
+<footer>
+  青数安全中心 · 使用说明书 v2.1 — 内容与 App 内「我的 → 关于 → 帮助」同源对照 · 可离线阅读 · 打印友好<br>
+  配套文档：《UI设计文档.html》（设计规格）、《UI设计稿.html》（视觉稿）
+</footer>
+
+<button class="backtop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  const links = [...document.querySelectorAll('nav.toc a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  addEventListener('scroll', () => {
+    const y = scrollY + 90;
+    let idx = 0;
+    secs.forEach((s, i) => { if (s && s.offsetTop <= y) idx = i; });
+    links.forEach((a, i) => a.classList.toggle('active', i === idx));
+    document.querySelector('.backtop').classList.toggle('show', scrollY > 600);
+  }, { passive: true });
+  const faqs = [...document.querySelectorAll('#s10 details')];
+  faqs.forEach(d => d.addEventListener('toggle', () => {
+    if (d.open) faqs.forEach(o => { if (o !== d) o.open = false; });
+  }));
+</script>
+</body>
 </html>
